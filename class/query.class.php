@@ -2,7 +2,7 @@
 include('./includes/query_tools.php');
 Class Query {
 	private $db ;
-	private $select;
+	public $select;
 	private $replace;
 	private $delete;
 	private $from;
@@ -18,14 +18,14 @@ Class Query {
 		$this->db = database::getInstance();
 	}
 
-	public function select($row = ' *',$ref = '', $table = '')
+	public function select($row = '*',$ref = '', $table = '')
 	{
 		$select = 'SELECT ';
 		$args = func_get_args();
 		
 		// cond : est ce une string ?
 		if (is_string($row)) {
-			$this->select = $select." $row";
+			$this->select = $select."$row";
 			if ($table != '')
 				$this->select = $select." FROM `$table`";
 
@@ -33,11 +33,9 @@ Class Query {
 		}
 		else{
 			foreach ($row as $key => $value) {
-				if(!empty($ref)){
-					$select .= $ref.".";
-				}
+
 				if (is_string($key)) {
-					$select .= "`$value` AS"." $key,";
+					$select .= "$value.`$key`,"; 
 				}
 				else {
 					$select .= "`$value`,";
@@ -83,9 +81,8 @@ Class Query {
 		else{
 			$bool = "";
 		}
-		
 		// FUNCTION OVERLOAD
-		if(!empty($param_1))
+		if(!empty($param_1)||($param_1 == 0))
 		{
 			$res=where_overload($param_1);
 			extract($res);
@@ -97,10 +94,10 @@ Class Query {
 		}
 		if(!empty($param_3))
 		{
-			$res=where_overload($param_2);
+			$res=where_overload($param_3);
 			extract($res);
 		}
-		
+
 		// END FUNCTION OVERLOAD
 		
 		$this->where .= $bool;
@@ -108,9 +105,10 @@ Class Query {
 			$this->where .= "(";
 			
 			foreach($row as $where){
-				if(empty($where[2]))
+
+				if(!isset($where[2]))
 					$where[2]='';
-				if(empty($where[3]))
+				if(!isset($where[3]))
 					$where[3]='';
 				
 				$this->where($where[0],$where[1],$where[2],$where[3]);
@@ -144,10 +142,9 @@ Class Query {
 			$query .= $this->from;
 
 		$query .= $this->join.$this->where.$this->order.$this->groupBy.$this->limit;
-
 		$result = $this->db->query($query);
 		$this->where="";
-		// echo ($query."<br />");
+		//echo ($query."<br />");
 		return($result->fetch_all(MYSQLI_ASSOC));
 	}
 

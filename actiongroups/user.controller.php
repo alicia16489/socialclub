@@ -49,7 +49,17 @@
 			$infos_user_pic[$key] = array("firstname" => $friend->get("firstname"),
 									 	  "lastname" => $friend->get("lastname"));
 		}
-		
+
+		// Get 5 latests message
+		$user->syncChatList();
+		$chat = $user->get('chats');
+		$hasMp = FALSE;
+		$mp = $user->getLastMessage();
+
+
+		// END Message and chats
+
+		$smarty->assign("mp",$mp);
 		$smarty->assign("status",$status_friends);
 		
 		$smarty->assign("friends",$user->get("friends"));

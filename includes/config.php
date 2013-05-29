@@ -25,6 +25,9 @@
 							'admin_panel' => 'user',
 							'activate_profil' => 'user',
 							'reactivate_profil' => 'user',
+
+							// Message
+							'privateMessage' => 'message',
 							
 							
 	);
