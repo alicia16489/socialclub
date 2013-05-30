@@ -105,7 +105,7 @@
 		}
 		$fields = array();
 
-		foreach ($this->fields as $field)array();
+		foreach ($this->fields as $field)
 
 		{
 			if (!empty($this->$field))
@@ -115,6 +115,7 @@
 		}
 
 		$q = new Query;
+	
 
 		$res = $q->replace($this->tableName,$fields)->exec();
 		return($res);

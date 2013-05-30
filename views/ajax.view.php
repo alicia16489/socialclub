@@ -1,4 +1,4 @@
 <?php
-$data = $smarty->render('./templates/'.$template.'.tpl');
+$data = $smarty->fetch('./templates/'.$template.'.tpl');
 echo $data;
 ?>

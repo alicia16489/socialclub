@@ -50,8 +50,8 @@
 	if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest')
 		{
 		    // Ajax request response
-		     echo 'tot';
-		    include('./templates/ajax.view.tpl');
+		     
+		    include('./views/ajax.view.php');
 		   
 		}
 		else

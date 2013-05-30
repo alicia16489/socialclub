@@ -56,11 +56,13 @@ Class Query {
 	public function replace($table,$fields)
 	{
 		$replace = 'REPLACE INTO `'.$table.'` SET ';
-		foreach ($fields as $field)
+		foreach ($fields as $field => $value)
 			{
-				$part .= "`".$field."` = '".myRealString($this->$field)."',";				
+				$replace .= " `".$field."` = '".myRealString($value)."',";				
 			}
 		$replace =  substr($replace, 0, -1);
+		$this->replace = $replace;
+		return($this);
 	}
 
 	public function from($tables,$alias = '')
@@ -156,8 +158,11 @@ Class Query {
 		$result = $this->db->query($query);
 		$this->where="";
 		//echo ($query."<br />");
-		if (!empty($replace) || !empty($delete))
-			return($result->insert_id);
+		if (!empty($this->replace) || !empty($this->delete)) {
+			
+			return($this->db->insert_id);
+		}
+			
 		else
 			return($result->fetch_all(MYSQLI_ASSOC));
 	}
