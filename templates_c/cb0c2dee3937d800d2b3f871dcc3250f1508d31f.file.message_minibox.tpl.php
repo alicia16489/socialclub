@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1.13, created on 2013-05-29 14:03:18
+<?php /* Smarty version Smarty-3.1.13, created on 2013-05-31 00:03:01
          compiled from ".\templates\message_minibox.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:3155451a5ee86038073-86487361%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:2858051a7cc95181b71-24802232%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,15 +11,15 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '3155451a5ee86038073-86487361',
+  'nocache_hash' => '2858051a7cc95181b71-24802232',
   'function' => 
   array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.13',
-  'unifunc' => 'content_51a5ee8603dff0_46802255',
+  'unifunc' => 'content_51a7cc95184914_97140295',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_51a5ee8603dff0_46802255')) {function content_51a5ee8603dff0_46802255($_smarty_tpl) {?><div id="last_mp">
+<?php if ($_valid && !is_callable('content_51a7cc95184914_97140295')) {function content_51a7cc95184914_97140295($_smarty_tpl) {?><div id="last_mp">
 	<h3 class="h3_title">Derniers messages</h3>
 	<ul>
 		<li>

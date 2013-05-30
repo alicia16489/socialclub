@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1.13, created on 2013-05-30 21:46:08
+<?php /* Smarty version Smarty-3.1.13, created on 2013-05-31 00:03:01
          compiled from ".\templates\header.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:2589351a5ee3e490124-90157779%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:2273751a7cc950d9d31-60774636%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,15 +11,15 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '2589351a5ee3e490124-90157779',
+  'nocache_hash' => '2273751a7cc950d9d31-60774636',
   'function' => 
   array (
   ),
-  'version' => 'Smarty-3.1.13',
-  'unifunc' => 'content_51a5ee3e493f29_09125617',
   'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.13',
+  'unifunc' => 'content_51a7cc950dcc84_39196712',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_51a5ee3e493f29_09125617')) {function content_51a5ee3e493f29_09125617($_smarty_tpl) {?><header>
+<?php if ($_valid && !is_callable('content_51a7cc950dcc84_39196712')) {function content_51a7cc950dcc84_39196712($_smarty_tpl) {?><header>
     <div class="pos">
     	<h1>
             <span>Social Night Club</span>
