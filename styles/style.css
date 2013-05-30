@@ -173,17 +173,18 @@ header nav
 	padding-top: 100px;
 }
 
-header nav ul
+
+header nav ul#menu
 {
 	margin-bottom: 3px;
 }
 
-header nav ul li
+header nav ul#menu li
 {
 	display: inline-block;
 }
 
-header nav ul li a
+header nav ul#menu li a
 {
 	display: block;
 	text-align: center;
@@ -194,7 +195,7 @@ header nav ul li a
 	background-color: #333;
 }
 
-header nav ul li a:hover
+header nav ul#menu li a:hover
 {
 	background-color: #444;
 }
@@ -207,6 +208,8 @@ div#post_status_box
 	width: 100%;
 	color: #FFF;
 	padding: 10px 0;
+	z-index: 104;
+	overflow: hidden;
 
 	position: relative;
 }
@@ -216,18 +219,53 @@ div#post_status_box span
 	padding-left: 10px;
 }
 
+div#post_status_box span form
+{
+	margin-top: 10px;
+	padding-left: 10px;
+}
+
+div#post_status_box span form textarea
+{
+	border: none;
+	width: 500px;
+	height: 100px;
+}
+
+div#toggle_status_box
+{
+	width: 30px;
+	height: 17px;
+	cursor: pointer;
+	padding-top: 13px;
+
+	position: absolute;
+	right: 2px;
+	top: 2px;
+}
+
 div#triangle_down
 {
-	float: right;
 	width: 0;
 	height: 0;
 	border-left: 5px solid transparent;
 	border-right: 5px solid transparent;
 	border-top: 7px solid #FFF;
 
-	position: absolute;
-	right: 10px;
-	top: 15px;
+	margin: 0 auto;
+
+}
+
+div#triangle_up
+{
+	width: 0;
+	height: 0;
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	border-bottom: 7px solid #FFF;
+
+	margin: 0 auto;
+
 }
 
 /* END HEADER */
@@ -386,10 +424,147 @@ span.message_author
 
 /* END LEFT */
 
+/* MAILBOX */
+
+div#mailbox
+{
+
+}
+
+div#mailbox ul
+{
+	float: left;
+	padding: 5px 0 0 10px;
+	margin-right: 10px;
+}
+
+div#mailbox ul li
+{
+	display: block;
+	width: 80px;
+	padding: 5px 0;
+	border-bottom: 1px solid #CCC;
+	border-right: 1px solid #CCC;
+}
+
+div#mailbox ul li:hover
+{
+	background-color: rgba(0, 0, 0, 0.02);
+}
+
+div#mailbox ul li img
+{
+	display: block;
+	margin: 0 auto 5px auto;
+
+}
+
+div#mailbox ul li span
+{
+	display: block;
+	text-align: center;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+div#room_chat
+{
+	float: left;
+	width: 530px;
+}
+
+div#room_chat ul
+{
+	float: left;
+	width: 100%;
+	margin-bottom: 15px;
+}
+
+div#room_chat ul li
+{
+	display: block;
+	width: 510px;
+	border-bottom: 1px solid #EEE;
+	border-right: none;
+	padding: 10px;
+	background-color: rgba(0, 0, 0, 0.01);
+}
+
+div#room_chat ul li .me
+{
+	float: left;
+	margin: 0;
+}
+
+div#room_chat ul li p.me
+{
+	float: left;
+	width: 440px;
+	margin-left: 10px;
+}
+
+div#room_chat ul li p.me span
+{
+	font-size: 10px;
+	font-weight: normal;
+	color: #CCC;
+	text-align: left;
+	margin-bottom: 10px;
+}
+
+div#room_chat ul li .him
+{
+	float: right;
+	margin: 0;
+}
+
+div#room_chat ul li p.him
+{
+	margin-right: 10px;
+	text-align: right;
+}
+
+div#room_chat ul li p.him span
+{
+	font-size: 10px;
+	font-weight: normal;
+	color: #CCC;
+	text-align: right;
+	margin-bottom: 10px;
+}
+
+div#mail_form form
+{
+	padding-left: 15px;
+}
+
+div#mail_form form textarea
+{
+	width: 100%;
+	border: 1px solid #EEE;
+}
+
+/* END MAILBOX */
+
+
 div#conteneur
 {
 	padding-top: 5px;
 	color: #FFF;
+}
+
+div#photo_wall
+{
+	padding: 0 10px;
+}
+
+.descro
+{
+	padding: 5px;
+	background-color: #FFF;
+	border: 1px solid #CCC;
+	display: none;
+	position: absolute;
 }
 
 .gallery_img
@@ -401,11 +576,12 @@ div#conteneur
 .content_img
 {
 	display: inline-block;
-	margin: 5px 0px 0px 0;
-	width: 120.4px;
-	height: 120.3px;
+	margin-top: 5px;
+	width: 202px;
+	height: 202px;
 	overflow: hidden;
-	border: 2px solid rgb(199, 44, 72);
+
+    box-shadow: 0px 0px 5px #CCC;
 }
 
 .ico_gallery
@@ -523,4 +699,15 @@ div#infos_profil_content table tr td
 .info_profil
 {
 	font-weight: bold;
+}
+
+div#descro
+{
+	height: 20px;
+	width: 75px;
+}
+
+.boxor_carou
+{
+	z-index: 100000;
 }

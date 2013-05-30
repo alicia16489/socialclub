@@ -6,18 +6,23 @@
 	{
 		$user->set("id",$_SESSION['user']['id']);
 		$user->hydrate();
-		$user->syncFriendsList();
-		$user->syncStatusFriends(1);
-		$user->syncPicturesFriends(1);
 
-		if (!empty($action))
-			$smarty->assign('action', $action);
+		if (!isset($_POST['ajax']))
+		{
+			$user->syncFriendsList();
+			$user->syncStatusFriends(1);
+			$user->syncPicturesFriends(1);
+			$user->syncPicturesList();
+
+			if (!empty($action))
+				$smarty->assign('action', $action);
+
+			if (!empty($_GET['id']))
+				$smarty->assign("id_get", $_GET['id']);
+			else
+				$smarty->assign("id_get", "");
+		}
 	}
-
-	if (!empty($_GET['id']))
-		$smarty->assign("id_get", $_GET['id']);
-	else
-		$smarty->assign("id_get", "");
 	
 	if($action == "home")
 	{
@@ -60,6 +65,7 @@
 		// END Message and chats
 
 		$smarty->assign("mp",$mp);
+
 		$smarty->assign("status",$status_friends);
 		
 		$smarty->assign("friends",$user->get("friends"));
@@ -67,6 +73,26 @@
 		
 		$smarty->assign('infos_pic', $user->get("pictures_friends"));
 		$smarty->assign('infos_user_pic', $infos_user_pic);
+	}
+	elseif($action == "forgot_pass"){
+		if(!empty($_POST)){
+			$user = new Users();
+			$user->set("email",$_POST['email']);
+			if($user->get("state_hydrate")){
+				$object = "Reset password";
+				$email = $invite->get("email");
+				$type = "";
+				
+				mailing($email,$object,$type,null,null,null,$invite->get("key"));
+			}
+			else{
+				$smarty->assign("error","no");
+			}
+			$smarty->assign("email",$_POST['email']);
+		}
+	}
+	elseif($action == "reset_pass"){
+		
 	}
 	elseif($action == "invite")
 	{
@@ -236,41 +262,61 @@
 	}
 	elseif ($action == "user_galery")
 	{
+		$user_galery = new Users();
+
 	  	if (isset($_GET['id']) && $_GET['id'] != $_SESSION['user']['id'])
 	  	{
-		    $user->set("id", $_GET['id']);
-		    $infos_pic = $user->syncPicturesList();
-		    $user->hydrate("firstname, lastname");
-		  	$title = "Photos de ".$user->get("firstname")." ".$user->get("lastname");
+	  		$friends_galery = new Users();
+		    $friends_galery->set("id", $_GET['id']);
+		    $friends_galery->hydrate("firstname,lastname");
+		  	$title = "Photos de ".$friends_galery->get("firstname")." ".$friends_galery->get("lastname");
+
+		  	$user_galery->set("id", $_GET['id']);
 	  	}
 	  	else
 	  	{
-	  		$user->set("id", $_SESSION['user']['id']);
-			$infos_pic = $user->syncPicturesList();
-		 	$title = "Mes photos";
+	  		$title = "Mes photos";
+	  		$user_galery->set("id", $_SESSION['user']['id']);
 	  	}
 
-		$infos_user = $user->syncInfosUser();
+	  	$user_galery->syncPicturesList();
+
+	  	$infos_user = array("user_id" => $user_galery->get("id"));
+
+	  	foreach ($user->get("pictures_friends") as $key => $value)
+		{
+			$friend = new Users();
+			$friend->set("id", $value['user_id']);
+			$friend->hydrate("firstname,lastname");
+
+			$infos_user_pic[$key] = array("firstname" => $friend->get("firstname"),
+									 	  "lastname" => $friend->get("lastname"));
+		}
 
 		$smarty->assign('infos_user', $infos_user);
-	  	$smarty->assign('infos_pic', $infos_pic);
+	  	$smarty->assign('infos_pic', $user->get("pictures_friends"));
+	  	$smarty->assign('infos_user_pic', $infos_user_pic);
+	  	$smarty->assign("friends",$user->get("friends"));
 	  	$smarty->assign('title', $title);
+	  	$smarty->assign('infos_pic_galery', $user_galery->get("pictures"));
 	}
 	elseif ($action == "del_picture")
 	{
-		if (isset($_GET['id']))
+		if (!empty($_SESSION['user']['id']) && isset($_GET['id']))
+
 		{
 			$pictures_del = new Pictures();
 			$pictures_del->set("id", $_GET['id']);
 			$pictures_del->delete("AND", array("users_id" => $_SESSION['user']['id']));
-			echo ($_GET['id']);
 
 			header('location: index.php?action=user_galery');
 		}
+		else
+			header("loaction: index.php");
 	}
 	elseif ($action == "avatarisator")
 	{
-		if (isset($_GET['path']))
+		if (!empty($_SESSION['user']['id']) && isset($_GET['path']))
 		{
 			$us = new Users();
 			$us->set("id", $_SESSION['user']['id']);
@@ -280,136 +326,117 @@
 
 			header('location: index.php?action=user_galery');
 		}
+		else
+		{
+			header("location: index.php");
+		}
 	}
 	elseif ($action == "profil")
 	{
-		$profil_user = new Users();
-
-		if (isset($_GET['id']) && $_GET['id'] != $_SESSION['user']['id'])
+		if (!isset($_POST['ajax']))
 		{
-			$name = new Users();
-			$name->set("id",$_GET['id']);
-			$name->hydrate();
-			$title = "Profil de ".$profil_user->get("firstname")." ".$profil_user->get("lastname");
-			$gallery_title = "Voir ses photos";
+			$profil_user = new Users();
 
-			$profil_user->set("id", $_GET['id']);
-		}
-		else
-		{
-			$profil_user->set("id",$_SESSION['user']['id']);
-			$title = "Mon profil";
-			$gallery_title = "Voir mes photos";
-		}
-
-		$profil_user->hydrate();
-
-		$infos_user = array();
-
-		$infos_user = array("id" => $profil_user->get("id"),
-							 "email" => $profil_user->get("email"),
-							 "firstname" => $profil_user->get("firstname"),
-							 "lastname" => $profil_user->get("lastname"),
-							 "description" => $profil_user->get("description"),
-							 "sexe" => $profil_user->get("sexe"),
-							 "birthdate" => $profil_user->get("birthdate"),
-							 "address" => $profil_user->get("address"),
-							 "zip_code" => $profil_user->get("zip_code"),
-							 "town" => $profil_user->get("town"),
-							 "country" => $profil_user->get("country"),
-							 "avatar_path" => $profil_user->get("avatar_path"),
-							 "created" => $profil_user->get("created"));
-
-		$infos_pic = array();
-		$user_pic_name = array();
-
-		foreach ($user->get("pictures_friends") as $key => $value)
-		{
-			$user_pic = new Users();
-			$user_pic->set("id", $value['user_id']);
-			$user_pic->hydrate("firstname,lastname");
-
-			$user_pic_name = array("firstname" => $user_pic->get("firstname"),
-								   "lastname" => $user_pic->get("lastname"));
-		}
-
-		$smarty->assign('gallery_title', $gallery_title);
-		$smarty->assign('title', $title);
-		$smarty->assign('friends_pic', $profil_user->get("pictures_friends"));
-		$smarty->assign('infos_user', $infos_user);
-
-		var_dump($profil_user->get("pictures_friends"));
-	}
-	elseif ($action == "edit_profil")
-	{
-		if (!empty($_GET['id']))
-		{
-			if ($_SESSION['user']['id'] == $_GET['id'])
+			if (isset($_GET['id']) && $_GET['id'] != $_SESSION['user']['id'])
 			{
-				$user->set("id",$_SESSION['user']['id']);
+				$profil_user->set("id", $_GET['id']);
+				$profil_user->hydrate();
+
+				if ($profil_user->get("state_hydrate") == true)
+				{
+					$name = new Users();
+					$name->set("id",$_GET['id']);
+					$name->hydrate();
+					$title = "Profil de ".$name->get("firstname")." ".$name->get("lastname");
+					$gallery_title = "Voir ses photos";
+				}
+				else
+					header("location: index.php");
+			}
+			else
+			{
+				$check_own = "yes";
+
+				$profil_user->set("id",$_SESSION['user']['id']);
 				$title = "Mon profil";
 				$gallery_title = "Voir mes photos";
 
-				$infos_user = $user->syncInfosUser();
-				$infos_pic = $user->syncPicturesList();
+				$profil_user->hydrate();
 
-				$smarty->assign('gallery_title', $gallery_title);
-				$smarty->assign('title', $title);
-				$smarty->assign('friends_pic', $infos_pic);
-				$smarty->assign('infos_user', $infos_user);
-
-				if (!empty($_POST))
-				{
-					$errors = array();
-
-					if (empty($_POST['firstname']))
-						$errors['firstname'] = "Vous devez remplir ce champs";
-
-					if (empty($_POST['lastname']))
-						$errors['lastname'] = "Vous devez remplir ce champs";
-
-					if (empty($_POST['email']))
-						$errors['email_e'] = "Vous devez remplir ce champs";
-
-					if (empty($_POST['resum']))
-						$errors['resum'] = "Vous devez remplir ce champs";
-
-					if (count($user->checkEmailExist($_POST['email'])) > 1 && $infos_user[0]['email'] != $_POST['email'])
-						$errors['email_d'] = "Cette E-mail est d&eacute;j&agrave; utilis&eacute;";
-
-					if (empty($errors))
-						$errors['erreur'] = "no";
-
-					// echo (json_encode($errors));
-					if (!empty($errors['erreur']))
-					{
-						$user->set("firstname", $_POST['firstname']);
-						$user->set("lastname", $_POST['lastname']);
-						$user->set("email", $_POST['email']);
-						$user->set("description", $_POST['resum']);
-						if (!empty($_POST['date']))
-							$user->set("birthdate", $_POST['date']);
-
-						if (!empty($_POST['sexe']))
-							$user->set("sexe", $_POST['sexe']);
-
-						$user->saveFk(NULL, array("id" => $_SESSION['user']['id']));
-
-						header('location: index.php?action=profil&id='.$_SESSION['user']['id']);
-					}
-					else
-					{
-						$smarty->assign("errors", $errors);
-						header('location: index.php?action=edit_profil&id='.$_SESSION['user']['id']);
-					}
-				}
+				$smarty->assign('check_own', $check_own);
 			}
-			else
-				header('location: index.php');
+
+			$profil_user->syncPicturesList();
+			$profil_user->syncFriendsList();
+
+			$infos_user = array();
+
+			$infos_user = array("id" => $profil_user->get("id"),
+								 "email" => $profil_user->get("email"),
+								 "firstname" => $profil_user->get("firstname"),
+								 "lastname" => $profil_user->get("lastname"),
+								 "description" => $profil_user->get("description"),
+								 "sexe" => $profil_user->get("sexe"),
+								 "birthdate" => $profil_user->get("birthdate"),
+								 "address" => $profil_user->get("address"),
+								 "zip_code" => $profil_user->get("zip_code"),
+								 "town" => $profil_user->get("town"),
+								 "country" => $profil_user->get("country"),
+								 "avatar_path" => $profil_user->get("avatar_path"),
+								 "created" => $profil_user->get("created"));
+
+			$infos_pic = array();
+			$user_pic_name = array();
+
+			foreach ($user->get("pictures_friends") as $key => $value)
+			{
+				$user_pic = new Users();
+				$user_pic->set("id", $value['user_id']);
+				$user_pic->hydrate("firstname,lastname");
+
+				$user_pic_name = array("firstname" => $user_pic->get("firstname"),
+									   "lastname" => $user_pic->get("lastname"));
+			}
+
+			$smarty->assign('gallery_title', $gallery_title);
+			$smarty->assign('title', $title);
+			$smarty->assign('infos_user', $infos_user);
+			$smarty->assign('friends', $profil_user->get("friends"));
+			$smarty->assign('friends_pic', $profil_user->get("pictures"));
 		}
 		else
 		{
-			header('location: index.php');
+			$data_ajax_liquide = array();
+
+			if (empty($post[$elem]))
+				$data_ajax_liquide['state'] = "Vous devez remplir ce champ";
+			else
+			{
+				if ($elem == "email")
+				{
+					$check_mail = new Users();
+
+					$check_mail->set("email", $post[$elem]);
+					$check_mail->hydrate();
+
+					if ($check_mail->get("state_hydrate") == true && $check_mail->get("email") != $user->get("email"))
+						$data_ajax_liquide['state'] = "Cette email est d&eacute;j&agrave; utilis&eacute";
+					elseif (filter_var($post[$elem], FILTER_VALIDATE_EMAIL) ==  false)
+						$data_ajax_liquide['state'] = "Cette email n'est pas valide";
+					else
+					{
+						$user->set($elem,$post[$elem]);
+						$user->save();
+						$data_ajax_liquide['state'] = "ok";
+					}
+				}
+				else
+				{
+					$user->set($elem,$post[$elem]);
+					$user->save();
+					$data_ajax_liquide['state'] = "ok";
+				}
+			}
 		}
 	}
 

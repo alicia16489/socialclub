@@ -21,8 +21,8 @@ class Status extends Table
 		}
 	
 	/* END BUILDER */
-	
-	public function hydrate(){
+
+	public function hydrate($fields = null){
 		$user = new Users();
 		$user->set("id",$this->user_id);
 		$user->hydrate("id,firstname,lastname,avatar_path");

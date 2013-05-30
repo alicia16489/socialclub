@@ -34,6 +34,10 @@
 				$action="validate";
 				$href="localhost/socialclub/index.php?action=".$action."&amp;code=".base64_encode($email);
 			break;
+			case "reset_pass":
+				$action="validate";
+				$href="localhost/socialclub/index.php?action=".$action."&amp;code=".base64_encode($email);
+			break;
 		}
 		$smarty->assign("url",$href);
 		$message_html = $smarty->fetch("email.".$type.".tpl");

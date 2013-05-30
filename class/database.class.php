@@ -6,7 +6,7 @@ class database extends mysqli {
     private $_user = "root";
     private $_pass = "";
     private $_base = "socialclub";
- 
+    private $_charset = "utf8";
     private $_cursor = null;
     private $_ressource = null;
     private $_errorNum = 0;
@@ -27,7 +27,7 @@ class database extends mysqli {
     */    
     private function __construct () {
     	$this->_ressource = parent::__construct($this->_host, $this->_user, $this->_pass,$this->_base);
-
+        parent::set_charset($this->_charset);
     }
  
     /**

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Mar 28 Mai 2013 à 20:43
+-- Généré le: Mer 29 Mai 2013 à 08:37
 -- Version du serveur: 5.1.53-community-log
 -- Version de PHP: 5.3.4
 
@@ -90,7 +90,7 @@ CREATE TABLE IF NOT EXISTS `pictures` (
   `title` varchar(45) DEFAULT NULL,
   `description` varchar(45) DEFAULT NULL,
   `path` varchar(255) DEFAULT NULL,
-  `hosted` binary(1) DEFAULT NULL,
+  `hosted` tinyint(1) DEFAULT NULL,
   `created` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`,`users_id`),
   KEY `fk_galery_users1` (`users_id`)
@@ -220,59 +220,10 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `rank_user_id`, `actif`, `email`, `password`, `firstname`, `lastname`, `description`, `sexe`, `birthdate`, `address`, `zip_code`, `town`, `country`, `avatar_path`, `created`) VALUES
-(1, 1, '1', 'aa@aa.fr', '1199a3e4cc65429bc91902e3e358face84a2970ae99c6fcf554bccd8badfbe9c', 'Baptiste', 'Gios', 'Je suis un ouf sisi', 'homme', '1992-08-20', NULL, NULL, NULL, NULL, './files/6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b/avatar.png', '2013-05-19 18:24:12'),
-(2, 1, '1', 'benoit.ciret@supinternet.fr', '5012830448dba88f559b5360487df339ca8e64255f73970289bf668b4daa5292', 'Ismael', 'Tifous', NULL, NULL, '0000-00-00', NULL, NULL, NULL, NULL, './files/4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a/avatar.jpg', '2013-05-19 22:20:45'),
+(1, 1, '1', 'aa@aa.fr', '1199a3e4cc65429bc91902e3e358face84a2970ae99c6fcf554bccd8badfbe9c', 'Encule Moi', 'Gioslol', 'hihiohhoihoiuuguguig', 'homme', '1992-05-15', NULL, NULL, NULL, NULL, './files/6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b/avatar.png', '2013-05-19 18:24:12'),
+(2, 1, '1', 'benoit.ciret@supinternet.fr', '5012830448dba88f559b5360487df339ca8e64255f73970289bf668b4daa5292', 'Ismael', 'Tifous', 'looool', NULL, NULL, NULL, NULL, NULL, NULL, './files/4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a/avatar.jpg', '2013-05-19 22:20:45'),
 (3, 1, '1', 'popo@gmail.com', '5012830448dba88f559b5360487df339ca8e64255f73970289bf668b4daa5292', 'Nicolas', 'Portier', NULL, NULL, NULL, NULL, NULL, NULL, NULL, './files/4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce/avatar.jpg', '2013-05-23 22:52:14'),
 (4, 1, '1', 'kikou@gogole.fr', '5012830448dba88f559b5360487df339ca8e64255f73970289bf668b4daa5292', 'Benoit', 'Ciret', NULL, NULL, NULL, NULL, NULL, NULL, NULL, './files/d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35/avatar.jpg', '2013-05-26 01:41:46');
-
---
--- Contraintes pour les tables exportées
---
-
---
--- Contraintes pour la table `comments`
---
-ALTER TABLE `comments`
-  ADD CONSTRAINT `fk_comments_posts1` FOREIGN KEY (`posts_id`) REFERENCES `posts` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_comments_users1` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Contraintes pour la table `friends`
---
-ALTER TABLE `friends`
-  ADD CONSTRAINT `fk_users_has_users_users` FOREIGN KEY (`users_from_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_users_has_users_users1` FOREIGN KEY (`users_to_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
-
---
--- Contraintes pour la table `invites`
---
-ALTER TABLE `invites`
-  ADD CONSTRAINT `fk_invite_users1` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Contraintes pour la table `pictures`
---
-ALTER TABLE `pictures`
-  ADD CONSTRAINT `fk_galery_users1` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Contraintes pour la table `posts`
---
-ALTER TABLE `posts`
-  ADD CONSTRAINT `fk_statuts_users1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Contraintes pour la table `private_message`
---
-ALTER TABLE `private_message`
-  ADD CONSTRAINT `fk_private_message_users1` FOREIGN KEY (`sender_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_private_message_users2` FOREIGN KEY (`receiver_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Contraintes pour la table `users`
---
-ALTER TABLE `users`
-  ADD CONSTRAINT `fk_users_rank_user1` FOREIGN KEY (`rank_user_id`) REFERENCES `rank_user` (`id`) ON DELETE NO ACTION;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

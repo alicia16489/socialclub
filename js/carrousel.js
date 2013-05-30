@@ -1,78 +1,62 @@
-/*
-    CARROUSEL JS C 
-    Fonctionnel
-*/
-
-
 var carrousel = {
     
-    nbSlide : 0,
-    nbCurrent : 1,
+    nbSlide : 0, // nb de slide
+    nbCurrent : 1, 
     elemCurrent : null,
     elem : null,
     timer : null,
     
     init : function(elem)
     {
-        this.nbSlide = elem.find(".slide").length;
+        this.nbSlide = elem.find(".slide").length; // on chope le nb de slide
         
-        // Créer la pagination
         elem.append('<div class="navigation"></div>');
 
         for (var i = 1; i <= this.nbSlide; i++)
         {
-            elem.find(".navigation").append("<span id='"+i+"'></span>");
+            if (i <= 5)
+                elem.find(".navigation").append("<span id='"+i+"'></span>"); // je balance un id pour chaque point de nav
+        }
+
+        var lol = {
+            
         }
         
         elem.find(".navigation span").click(function()
         {
-            carrousel.gotoSlide($(this).attr('id'));
+            carrousel.gotoSlide($(this).attr('id')); // quand on clique sur un bout de nav on appel gotoSlide
         });
         
-        // Initialisation du carrousel
         this.elem = elem;
         elem.find(".slide").hide();
         elem.find(".slide:first").show();
         this.elemCurrent = elem.find(".slide:first");
-        this.elem.find(".navigation").css("opacity", 0.6);   // On rend la navigation opaque
         this.elem.find(".navigation span:first").addClass("active");
-        
-        // On cré le timer
+
         carrousel.play();
 
-        // Stop quand on passe dessus
         elem.mouseover(carrousel.stop);
         elem.mouseout(carrousel.play);
     },
     
-    gotoSlide : function(num)
+    gotoSlide : function(num) // goto slide nous permet d'aller a l'img voulu
     {
-        if (num == this.nbCurrent)
-            return false;
-
-        // Animation en fadeIn/fadeOut
-        this.elemCurrent.fadeOut();
-        this.elem.find("#slide"+num).fadeIn();
+        if (num == this.nbCurrent) // anti-bug
+            return false; // on arrete la fonction
         
-        // Animation en slide
         var sens = 1;
-        if(num < this.nbCurrent)
+
+        if (num < this.nbCurrent)
             sens = -1;
-        var cssDeb = { "left" : sens * this.elem.width() };
-        var cssFin = { "left" : -sens * this.elem.width() };
-        this.elem.find("#slide"+ num).show().css(cssDeb);
+
+        this.elem.find("#slide"+ num).show().css({ "left" : sens * this.elem.width() });
         this.elem.find("#slide"+ num).animate({"top": 0,"left": 0}, 500);
-        this.elemCurrent.animate(cssFin, 500);
-     
-        //  Animation Titre + Fadein/Out sur la div .visu
+
         this.elemCurrent.find(".visu").fadeOut();
         this.elem.find("#slide"+ num).show();
         this.elem.find("#slide"+ num +" .visu").hide().fadeIn();
-        var titleHeight = this.elemCurrent.find(".title").height();
-        this.elemCurrent.find(".title").animate({"bottom": -titleHeight},500);
-        this.elem.find("#slide"+ num +" .title").css("bottom", -titleHeight).animate({"bottom": 0}, 500);        
         this.elem.find(".navigation span").removeClass("active");
-        this.elem.find(".navigation span:eq("+ (num - 1) +")").addClass("active");
+        this.elem.find(".navigation span:eq("+ (num - 1) +")").addClass("active"); // je cible les span de nav qui correspon au nul de l'img
         this.nbCurrent = num;
         this.elemCurrent = this.elem.find("#slide" + num);
     },
@@ -101,7 +85,6 @@ var carrousel = {
     },
     play : function()
     {
-        window.clearInterval(carrousel.timer);
         carrousel.timer = window.setInterval("carrousel.next()", 5000);
     }
 

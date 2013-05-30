@@ -20,6 +20,10 @@
 							'avatarisator' => 'user',
 							'profil' => 'user',
 							'edit_profil' => 'user',
+
+							'reset_pass' => 'user',
+							'forgot_pass' => 'user',
+							'privateMessage' => 'user',
 							
 							// user control
 							'admin_panel' => 'user',
@@ -29,7 +33,6 @@
 							// Message
 							'privateMessage' => 'message',
 							'sendMsg' => 'message'
-							
 							
 	);
 	

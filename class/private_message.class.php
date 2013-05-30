@@ -1,4 +1,5 @@
 <?php
+
 class private_message extends Table {
 
 	protected $id;
@@ -12,10 +13,7 @@ class private_message extends Table {
 	protected $receiver_read;
 
 	function __construct() {
-		$this->tableName = 'private_message'; 
+		$this->tableName = 'private_message';
 		parent::__construct();
 	}
-
-
-
 }

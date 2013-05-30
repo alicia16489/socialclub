@@ -26,7 +26,8 @@ Class Query {
 		
 		// cond : est ce une string ?
 		if (is_string($row)) {
-			$this->select = $select."$row";
+			$this->select = $select." $row";
+
 			if ($table != '')
 				$this->select = $select." FROM `$table`";
 
@@ -94,8 +95,10 @@ Class Query {
 		else{
 			$bool = "";
 		}
+
 		// FUNCTION OVERLOAD
 		if(!empty($param_1)||($param_1 == 0))
+
 		{
 			$res=where_overload($param_1);
 			extract($res);
@@ -111,6 +114,7 @@ Class Query {
 			extract($res);
 		}
 
+		
 		// END FUNCTION OVERLOAD
 		
 		$this->where .= $bool;
@@ -155,8 +159,10 @@ Class Query {
 			$query .= $this->from;
 
 		$query .= $this->join.$this->where.$this->order.$this->groupBy.$this->limit;
+
 		$result = $this->db->query($query);
 		$this->where="";
+
 		//echo ($query."<br />");
 		if (!empty($this->replace) || !empty($this->delete)) {
 			

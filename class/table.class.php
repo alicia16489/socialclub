@@ -51,7 +51,6 @@
 
 		return($data);
 
-
 	}
 	
 	public function fieldsTable()

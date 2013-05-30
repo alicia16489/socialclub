@@ -5,6 +5,8 @@
     margin: 0 auto;
     position: relative;
     overflow: hidden;
+
+    box-shadow: 0px 0px 5px #CCC;
 }
 
 .visu
@@ -41,7 +43,7 @@
 .navigation
 {
     position: absolute;
-    bottom: 38px;
+    bottom: 10px;
     right: 5px;
 }
 
@@ -62,7 +64,6 @@
 .navigation span.active
 {
     background: #FFF;
-    color: #000;
 }
 
 .last_photo_img

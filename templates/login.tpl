@@ -19,7 +19,7 @@
 				</tr>
 				<tr>
 					<td colspan="2">
-						<input type="submit" class="submit" value="Connexion"><a href="#" id="forgot_pass">Mot de passe oubli&eacute;</a>
+						<input type="submit" class="submit" value="Connexion"><a href="./index.php?action=forgot_pass" id="forgot_pass">Mot de passe oubli&eacute;</a>
 					</td>
 				</tr>
 				{if isset($error['infos'])}
