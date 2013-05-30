@@ -54,7 +54,18 @@
 			$infos_user_pic[$key] = array("firstname" => $friend->get("firstname"),
 									 	  "lastname" => $friend->get("lastname"));
 		}
-		
+
+		// Get 5 latests message
+		$user->syncChatList();
+		$chat = $user->get('chats');
+		$hasMp = FALSE;
+		$mp = $user->getLastMessage();
+
+
+		// END Message and chats
+
+		$smarty->assign("mp",$mp);
+
 		$smarty->assign("status",$status_friends);
 		
 		$smarty->assign("friends",$user->get("friends"));
@@ -187,7 +198,6 @@
 			$user->set("email",$_POST['email']);
 			$user->hydrate();
 			$user->get("password");
-			echo stringHash($_POST['password']);
 			if(!$user->get('state_hydrate'))
 			{
 				$login_error['hydrate'] = true;
@@ -207,7 +217,6 @@
 
 				header("Location: index.php"); die();
 			}
-			print_r($login_error);
 			if(isset($login_error)){
 				$smarty->assign("error",$login_error);
 				$smarty->assign("post",$_POST);
@@ -294,6 +303,7 @@
 	elseif ($action == "del_picture")
 	{
 		if (!empty($_SESSION['user']['id']) && isset($_GET['id']))
+
 		{
 			$pictures_del = new Pictures();
 			$pictures_del->set("id", $_GET['id']);
@@ -428,7 +438,6 @@
 				}
 			}
 		}
-
 	}
 
 ?>

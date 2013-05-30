@@ -1,8 +1,8 @@
 <?php
-
-	if (isset($data_ajax_liquide))
-	{
-		echo json_encode($data_ajax_liquide);
-	}
-
+if($_POST['requete'] == 'loadTpl'){
+	
+}
+elseif($_POST['requete'] == 'action'){
+	echo json_encode($data);
+}
 ?>

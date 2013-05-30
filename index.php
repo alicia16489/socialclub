@@ -20,7 +20,7 @@
 		if(!empty($_SESSION)){
 			$action = $config['default']['log'];
 		}
-	
+
 	/* END DEFAULT ACTION */
 	
 	/* GET */

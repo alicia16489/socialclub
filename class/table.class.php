@@ -32,25 +32,25 @@
 	}
 	
 	// methodes
-	public function getAll($elem=null,$order=null,$sens=null)
+	public function getAll($elem=' *',$order=null,$sens='ASC',$cond=null,$limit = NULL)
 	{
-		if(empty($elem))
-		{
-			$query="SELECT * FROM ".$this->tableName."";
+		$q = new Query;
+		$q->select($elem)->from($this->tableName);
+
+		if ($cond != NULL) {
+			$q->where($cond);
 		}
-		else
-		{
-			$param = " ORDER BY ".$order." ".$sens;
-		
-			if($elem == "users"){
-				$query="SELECT *, b.name 'rank' FROM ".$this->tableName." a, users_rank b WHERE a.users_rank_id=b.id".$param."";
-			}
-			elseif($elem == "medias"){
-				$query="SELECT *, b.name FROM ".$this->tableName.$param."";
-			}
-		}
-		$data=myFetchAssoc($query);
-		return $data;
+			
+		if (!(is_null($order)))
+			$q->order($order,'',$sens);
+
+		if (!is_null($limit))
+			$q->limit($limit);
+
+		$data = $q->exec();
+
+		return($data);
+
 	}
 	
 	public function fieldsTable()

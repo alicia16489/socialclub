@@ -20,6 +20,7 @@
 							'avatarisator' => 'user',
 							'profil' => 'user',
 							'edit_profil' => 'user',
+
 							'reset_pass' => 'user',
 							'forgot_pass' => 'user',
 							'privateMessage' => 'user',
@@ -28,8 +29,10 @@
 							'admin_panel' => 'user',
 							'activate_profil' => 'user',
 							'reactivate_profil' => 'user',
-							
-							
+
+							// Message
+							'privateMessage' => 'message',
+									
 	);
 	
 	// array filtre

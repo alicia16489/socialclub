@@ -1,3 +1,4 @@
+
 var descr = false;
 
 $(".boxer").boxer();
@@ -497,6 +498,17 @@ if (check_own == 'yes')
 		}
 	});
 }
+$(".boxer").boxer();
+
+var widthPic = $(".gallery_img").width();
+var newWidthPic = (widthPic * 30) / 100;
+$(".gallery_img").width(newWidthPic);
+
+var widthAva = $(".avatar_profil").width();
+var newWidthAva = (widthAva * 30) / 100;
+$(".avatar_profil").width(newWidthAva);
+
+$("#edit_infos").width("5%");
 
 var widthPic = $(".galery_img").width();
 var newWidthPic = (widthPic * 20) / 100;
@@ -538,5 +550,4 @@ $(".content_img").mouseenter(function(){
 $(".content_img").mouseleave(function(){
 
 	$(this).prev().hide();
-
 });

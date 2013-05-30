@@ -1,3 +1,4 @@
+
 <div class="pos">
 	<div id="left_col">
 		<div id="mailbox">

@@ -18,7 +18,11 @@ Class Query {
 		$this->db = database::getInstance();
 	}
 
+<<<<<<< HEAD
 	public function select($row = ' *',$ref = '', $table = '')
+=======
+	public function select($row = '*',$ref = '', $table = '')
+>>>>>>> 66231f18e34ea359d55d07e13dd26a02ba9f8d87
 	{
 		$select = 'SELECT ';
 		$args = func_get_args();
@@ -26,6 +30,7 @@ Class Query {
 		// cond : est ce une string ?
 		if (is_string($row)) {
 			$this->select = $select." $row";
+
 			if ($table != '')
 				$this->select = $select." FROM `$table`";
 
@@ -33,11 +38,9 @@ Class Query {
 		}
 		else{
 			foreach ($row as $key => $value) {
-				if(!empty($ref)){
-					$select .= $ref.".";
-				}
+
 				if (is_string($key)) {
-					$select .= "`$value` AS"." $key,";
+					$select .= "$value.`$key`,"; 
 				}
 				else {
 					$select .= "`$value`,";
@@ -83,9 +86,10 @@ Class Query {
 		else{
 			$bool = "";
 		}
-		
+
 		// FUNCTION OVERLOAD
-		if(!empty($param_1))
+		if(!empty($param_1)||($param_1 == 0))
+
 		{
 			$res=where_overload($param_1);
 			extract($res);
@@ -100,6 +104,7 @@ Class Query {
 			$res=where_overload($param_3);
 			extract($res);
 		}
+
 		
 		// END FUNCTION OVERLOAD
 		
@@ -108,9 +113,10 @@ Class Query {
 			$this->where .= "(";
 			
 			foreach($row as $where){
-				if(empty($where[2]))
+
+				if(!isset($where[2]))
 					$where[2]='';
-				if(empty($where[3]))
+				if(!isset($where[3]))
 					$where[3]='';
 				
 				$this->where($where[0],$where[1],$where[2],$where[3]);
@@ -147,7 +153,7 @@ Class Query {
 
 		$result = $this->db->query($query);
 		$this->where="";
-		// echo ($query."<br />");
+		
 		return($result->fetch_all(MYSQLI_ASSOC));
 	}
 

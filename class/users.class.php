@@ -16,7 +16,7 @@ class Users extends Table
 		protected $status_friends = array();
 		protected $friends = array();
 		protected $invite = array();
-		protected $mp = array();
+		protected $chats = array();
 		
 	/* END ATTRIBUTES */
 	
@@ -35,12 +35,59 @@ class Users extends Table
 	/* METHODS */
 
 		
+<<<<<<< HEAD
 	public function syncPMList($nb=null)
 	{
 		
 	}
 	
 	public function syncPicturesList(){
+=======
+	public function syncChatList()
+	{
+		$chat = New Chats;
+
+		$data = $chat->getAll(array('id'),'id','ASC',array(array('id_user_1',$this->id),array('id_user_2',$this->id,'OR')));
+
+		foreach ($data as $value) {
+			$chats[] = $value['id'];
+		}
+		
+		foreach ($chats as $key => $value) {
+			$chat = New Chats;
+			$chat->set('id',$value);
+			$chat->hydrate();
+			$chat->countNewMsg();
+		
+			$chat_list[] = $chat;
+			
+		}
+
+		$this->chats = $chat_list;
+
+
+	}
+
+	public function getLastMessage($limit = 5)
+	{
+		$q = new Query;
+
+		$data = $q
+				->select(array('id'=>'p','id_chat'=>'p','content'=>'p','firstname'=>'u','avatar_path'=>'u','lastname'=>'u','sender_id'=>'p'))->from('private_message','p')
+				->join(array('u'=>'users'),array('u'=>'u.id = sender_id'))
+				->join(array('c'=>'chats'),array('c'=>'c.id = p.id_chat'))
+				->where(array(array('c.id_user_1',$this->id),array('c.id_user_2',$this->id,'OR')))
+				->where('p.receiver_deleted',0,'AND')
+				->where('p.sender_id',$this->id,'!=','AND')
+				->order('date_send')
+				->limit(5)
+				->exec();
+		return($data);
+	}
+
+	public function syncPicturesList(){
+		
+>>>>>>> 66231f18e34ea359d55d07e13dd26a02ba9f8d87
 		$query = new Query();
 		$data=$query
 					->select(array("id","title","description","path","created"),"b")

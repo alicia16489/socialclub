@@ -17,6 +17,10 @@ var carrousel = {
             if (i <= 5)
                 elem.find(".navigation").append("<span id='"+i+"'></span>"); // je balance un id pour chaque point de nav
         }
+
+        var lol = {
+            
+        }
         
         elem.find(".navigation span").click(function()
         {
@@ -88,5 +92,4 @@ var carrousel = {
 
 $(function(){
     carrousel.init($("#carrousel"));
-    console.log(carrousel.elemCurrent);
 });

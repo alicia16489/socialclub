@@ -7,7 +7,6 @@ class database extends mysqli {
     private $_pass = "";
     private $_base = "socialclub";
     private $_charset = "utf8";
- 
     private $_cursor = null;
     private $_ressource = null;
     private $_errorNum = 0;
