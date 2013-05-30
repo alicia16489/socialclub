@@ -34,15 +34,6 @@ class Users extends Table
 	
 	/* METHODS */
 
-		
-<<<<<<< HEAD
-	public function syncPMList($nb=null)
-	{
-		
-	}
-	
-	public function syncPicturesList(){
-=======
 	public function syncChatList()
 	{
 		$chat = New Chats;
@@ -86,11 +77,9 @@ class Users extends Table
 	}
 
 	public function syncPicturesList(){
-		
->>>>>>> 66231f18e34ea359d55d07e13dd26a02ba9f8d87
 		$query = new Query();
 		$data=$query
-					->select(array("id","title","description","path","created"),"b")
+					->select(array("id" => "b","title" => "b","description" => "b","path" => "b","created" => "b"))
 					->from("pictures","b")
 					->join(array("a" => "users"),array("a" => "b.users_id=a.id"))
 					->where("b.users_id",$this->id)
@@ -141,7 +130,7 @@ class Users extends Table
 	{
 		$friends = array();
 		$data=$this->query
-				->select(array("id","firstname","lastname","avatar_path"),"a")
+				->select(array("id" => "a","firstname" => "a","lastname" => "a","avatar_path" => "a"))
 				->from("users","a")
 				->join(array("b" => "friends"),array("b" => "a.id=b.users_to_id"))
 				->join(array("c" => "friends"),array("c" => "a.id=c.users_from_id"))

@@ -18,11 +18,7 @@ Class Query {
 		$this->db = database::getInstance();
 	}
 
-<<<<<<< HEAD
-	public function select($row = ' *',$ref = '', $table = '')
-=======
 	public function select($row = '*',$ref = '', $table = '')
->>>>>>> 66231f18e34ea359d55d07e13dd26a02ba9f8d87
 	{
 		$select = 'SELECT ';
 		$args = func_get_args();
@@ -153,7 +149,7 @@ Class Query {
 
 		$result = $this->db->query($query);
 		$this->where="";
-		
+		//echo $query."<br>";
 		return($result->fetch_all(MYSQLI_ASSOC));
 	}
 
