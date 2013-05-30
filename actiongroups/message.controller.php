@@ -1,12 +1,23 @@
 <?php
 
 $user = new Users;
+	
+
+	if ($action == 'sendMsg') {
+
+		$msg = new private_message;
+		$msg->set('sender_id',$_SESSION['user']['id']);
+		$msg->set('id_chat',$_POST['id_chat']);
+		$msg->set('content',$_POST['content']);
+		$res = $msg->Save();
+		$tpl = "sendMsgResponse";
+		$smarty->assign('res',$res);
+	}
 
 	if(!empty($_SESSION['user']['id']))
 	{
 		$user->set("id",$_SESSION['user']['id']);
 		$user->hydrate();
-		$user->syncFriendsList();
 		$user->syncStatusFriends(1);
 		$user->syncChatList();
 		$chat = $user->get('chats');
@@ -42,32 +53,32 @@ $user = new Users;
 		else
 			$id_chat = $_GET['id_chat'];
 
-		
+		$last_msg = array();
 		foreach ($chat as $key => $value) {
 
 			$friend = new Users;
 			$id1 = $value->get('id_user_1');
 			$id2 = $value->get('id_user_2');
+			$id_receiver = ($user->get('id') == $id1) ? $id2 : $id1;
+			if ($value->get('id') == $id_chat)
+				$id_current_receiver = $id_receiver;
+			
 
-			$id = ($user->get('id') == $id1) ? $id2 : $id1;
-
-			$friend->set('id',$id);
+			$friend->set('id',$id_receiver);
 			$friend->hydrate('id,firstname,lastname');
 
 			$chat_list[] = $friend;
 
 			$chat[$key]->getLastMessage('*',30);
-			$last_msg[] = $chat[$key]->get('mp');
+			$msg_by_chat = $chat[$key]->get('mp');
+			if (!empty($msg_by_chat))
+				$last_msg[$key] = $msg_by_chat;
 		}
-		echo 'last_msg<br/>';
-		var_dump($last_msg);
-		echo 'chat<br/>';
-		var_dump($chat);
-		echo 'chat_list<br/>';
-		var_dump($chat_list);
-		
-		$smarty->assign('last_msg',$last_msg);
+
+		$smarty->assign('id_receiver',$id_current_receiver);
+		$smarty->assign('msg',$last_msg);
 		$smarty->assign('chat_list',$chat_list);
+		$smarty->assign('id_chat',$id_chat);
 	}
 
 

@@ -138,3 +138,17 @@ $('#post_status_box').mouseover(function(){
 $('#post_status_box').mouseout(function(){
 	$('#post_status_box').height('15px')
 });
+
+
+// Envoi message en Ajax
+
+$('#msg').on('submit',function() {
+
+		var action = $('#msg').attr('action');
+		console.log(action);
+		$.post(action,$('#msg').serialize(),function(textStatus){
+			console.log(textStatus);
+		});
+
+		return false;
+})

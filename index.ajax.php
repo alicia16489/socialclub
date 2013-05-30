@@ -8,8 +8,6 @@
 	
 	// AUTO-LLOAD DES CLASS
 	spl_autoload_register('downloadClass');
-
-	$link = connectBDD($DNS, $DB_USER, $DB_PASS);
 	
 	$action = $_POST['action'];
 	$post = $_POST['post'];

@@ -28,6 +28,7 @@
 
 							// Message
 							'privateMessage' => 'message',
+							'sendMsg' => 'message'
 							
 							
 	);

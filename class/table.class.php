@@ -103,23 +103,24 @@
 		{
 			$this->fieldsTable();
 		}
-		
-		foreach ($this->fields as $field)
+		$fields = array();
+
+		foreach ($this->fields as $field)array();
+
 		{
 			if (!empty($this->$field))
 			{
-				$part .= "`".$field."` = '".myRealString($this->$field)."',";
+				$fields[$field] = myRealString($this->$field);
 			}
 		}
 
-		$part = substr($part, 0, -1);
-		$query = 'REPLACE INTO `'.$this->tableName.'` SET '.$part.'';
+		$q = new Query;
 
-		myQuery($query);
-		
+		$res = $q->replace($this->tableName,$fields)->exec();
+		return($res);
 		if ($this->$pk == null)
 		{
-			$this->set('id', mysqli_insert_id($link));
+			$this->set('id', $res);
 		}
 	}
 
