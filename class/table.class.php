@@ -117,11 +117,12 @@
 	
 
 		$res = $q->replace($this->tableName,$fields)->exec();
-		return($res);
+
 		if ($this->$pk == null)
 		{
 			$this->set('id', $res);
 		}
+		return($res);
 	}
 
 	public function hydrate($fields = ' *')

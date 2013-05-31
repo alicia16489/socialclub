@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.13, created on 2013-05-31 04:40:51
+<?php /* Smarty version Smarty-3.1.13, created on 2013-05-31 04:59:13
          compiled from ".\templates\privateMessage.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:1082951a80db3c4ab53-77978269%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '2a4fa6d71bc11a6ea8de038173edf5a11d7de780' => 
     array (
       0 => '.\\templates\\privateMessage.tpl',
-      1 => 1369964584,
+      1 => 1369968808,
       2 => 'file',
     ),
   ),
@@ -15,6 +15,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.13',
+  'unifunc' => 'content_51a80db3cd9f86_80441455',
   'variables' => 
   array (
     'chat_list' => 0,
@@ -25,13 +27,21 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'id_receiver' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.13',
-  'unifunc' => 'content_51a80db3cd9f86_80441455',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_51a80db3cd9f86_80441455')) {function content_51a80db3cd9f86_80441455($_smarty_tpl) {?><div class="pos">
 	<div id="left_col">
 		<div id="mailbox">
 			<h3 class="h3_title">Boîte de récéption</h3>
+			<div id="new_talk">
+				Nouvelle conversation
+				<select>
+					<option value=""></option>
+					<option value="">Benoit Ciret</option>
+					<option value="">Nicolas Portier</option>
+				</select>
+				<input type="submit" value="Go"/>
+				<div class="clear"></div>
+			</div>
 			<ul>
 				<?php  $_smarty_tpl->tpl_vars['user'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['user']->_loop = false;
  $_from = $_smarty_tpl->tpl_vars['chat_list']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}

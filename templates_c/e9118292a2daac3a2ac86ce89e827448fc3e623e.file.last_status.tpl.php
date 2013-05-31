@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1.13, created on 2013-05-31 00:23:55
+<?php /* Smarty version Smarty-3.1.13, created on 2013-05-31 04:59:18
          compiled from ".\templates\last_status.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:25351a7d17b683190-46362775%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:1497151a81206d5b780-54300250%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,7 +11,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '25351a7d17b683190-46362775',
+  'nocache_hash' => '1497151a81206d5b780-54300250',
   'function' => 
   array (
   ),
@@ -23,9 +23,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.13',
-  'unifunc' => 'content_51a7d17b6ed3f3_52293850',
+  'unifunc' => 'content_51a81206db0567_90802379',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_51a7d17b6ed3f3_52293850')) {function content_51a7d17b6ed3f3_52293850($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_capitalize')) include 'C:\\wamp\\www\\socialClub\\libs\\plugins\\modifier.capitalize.php';
+<?php if ($_valid && !is_callable('content_51a81206db0567_90802379')) {function content_51a81206db0567_90802379($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_capitalize')) include 'C:\\wamp\\www\\socialClub\\libs\\plugins\\modifier.capitalize.php';
 ?><div id="last_status">
 	<h3 class="h3_title">Derniers statuts</h3>
 	<?php if (!empty($_smarty_tpl->tpl_vars['status']->value)){?>
