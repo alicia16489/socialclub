@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1.13, created on 2013-05-31 00:23:55
+<?php /* Smarty version Smarty-3.1.13, created on 2013-05-31 04:42:36
          compiled from ".\templates\friends_list.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:992051a7d17b8172f1-33722933%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:2132651a80e1cdc3012-80698401%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,7 +11,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '992051a7d17b8172f1-33722933',
+  'nocache_hash' => '2132651a80e1cdc3012-80698401',
   'function' => 
   array (
   ),
@@ -23,9 +23,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.13',
-  'unifunc' => 'content_51a7d17b8832a0_57283566',
+  'unifunc' => 'content_51a80e1ce1fc49_63266624',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_51a7d17b8832a0_57283566')) {function content_51a7d17b8832a0_57283566($_smarty_tpl) {?><div id="friends_list">
+<?php if ($_valid && !is_callable('content_51a80e1ce1fc49_63266624')) {function content_51a80e1ce1fc49_63266624($_smarty_tpl) {?><div id="friends_list">
 	<h3 class="h3_title">Amis</h3>
 	<div>
 		<?php if (isset($_smarty_tpl->tpl_vars['friends']->value)){?>

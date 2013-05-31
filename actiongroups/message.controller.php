@@ -84,7 +84,7 @@ $user = new Users;
 		}
 
 
-		$smarty->assign('msg',$msg);
+		$smarty->assign('message',$msg);
 		$smarty->assign('id_receiver',$id_current_receiver);
 		$smarty->assign('last_msg',$last_msg);
 		$smarty->assign('chat_list',$chat_list);

@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1.13, created on 2013-05-31 01:55:23
+<?php /* Smarty version Smarty-3.1.13, created on 2013-05-31 04:42:38
          compiled from ".\templates\last_photos.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:1235551a7d17b76ae48-98511411%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:1164451a80e1e18a173-96194925%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,12 +11,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '1235551a7d17b76ae48-98511411',
+  'nocache_hash' => '1164451a80e1e18a173-96194925',
   'function' => 
   array (
   ),
-  'version' => 'Smarty-3.1.13',
-  'unifunc' => 'content_51a7d17b7ee898_69514395',
   'variables' => 
   array (
     'infos_pic' => 0,
@@ -25,8 +23,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'infos_user_pic' => 0,
   ),
   'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.13',
+  'unifunc' => 'content_51a80e1e1f7879_51179444',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_51a7d17b7ee898_69514395')) {function content_51a7d17b7ee898_69514395($_smarty_tpl) {?><div id="last_photos">
+<?php if ($_valid && !is_callable('content_51a80e1e1f7879_51179444')) {function content_51a80e1e1f7879_51179444($_smarty_tpl) {?><div id="last_photos">
 	<h3 class="h3_title">Dernières photos</h3>
 	<!-- TEST CAROUSEL -->
 	<div id="conteneur">
