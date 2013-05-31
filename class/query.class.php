@@ -2,16 +2,17 @@
 include('./includes/query_tools.php');
 Class Query {
 	private $db ;
-	private $select;
-	private $replace;
-	private $delete;
-	private $from;
-	protected $where;
+	private $select = '';
+	private $insert= '';
+	private $replace= '';
+	private $delete= '';
+	private $from= '';
+	protected $where= '';
 	private $bin_where = 1;
-	private $order;
-	private $groupBy;
-	private $join;
-	private $limit;
+	private $order= '';
+	private $groupBy= '';
+	private $join= '';
+	private $limit= '';
 
 	public function __construct()
 	{
@@ -51,6 +52,18 @@ Class Query {
 
 		$this->select = $select;
 		return ($this);
+	}
+
+	public function replace($table,$fields)
+	{
+		$replace = 'REPLACE INTO `'.$table.'` SET ';
+		foreach ($fields as $field => $value)
+			{
+				$replace .= " `".$field."` = '".myRealString($value)."',";				
+			}
+		$replace =  substr($replace, 0, -1);
+		$this->replace = $replace;
+		return($this);
 	}
 
 	public function from($tables,$alias = '')
@@ -149,8 +162,15 @@ Class Query {
 
 		$result = $this->db->query($query);
 		$this->where="";
-		//echo $query."<br>";
-		return($result->fetch_all(MYSQLI_ASSOC));
+
+		//echo ($query."<br />");
+		if (!empty($this->replace) || !empty($this->delete)) {
+			
+			return($this->db->insert_id);
+		}
+			
+		else
+			return($result->fetch_all(MYSQLI_ASSOC));
 	}
 
 	public function order($fields,$ref='',$sens='ASC')

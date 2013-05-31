@@ -5,45 +5,19 @@
 	</div>
 	
 	<ul>
-		<li>
-			<img src="img/avatar.png" width="40" height="40" alt="Baptiste">
-			<div class="message_content">
-				<span class="message_author">Baptiste Gios</span>
-				<p>Coucou, c'est moi. Est-ce que...</p>
-			</div>
-			<div class="clear"></div>
-		</li>
-		<li>
-			<img src="img/avatar.png" width="40" height="40" alt="Baptiste">
-			<div class="message_content">
-				<span class="message_author">Baptiste Gios</span>
-				<p>Coucou, c'est moi. Est-ce que...</p>
-			</div>
-			<div class="clear"></div>
-		</li>
-		<li>
-			<img src="img/avatar.png" width="40" height="40" alt="Baptiste">
-			<div class="message_content">
-				<span class="message_author">Baptiste Gios</span>
-				<p>Coucou, c'est moi. Est-ce que...</p>
-			</div>
-			<div class="clear"></div>
-		</li>
-		<li>
-			<img src="img/avatar.png" width="40" height="40" alt="Baptiste">
-			<div class="message_content">
-				<span class="message_author">Baptiste Gios</span>
-				<p>Coucou, c'est moi. Est-ce que...</p>
-			</div>
-			<div class="clear"></div>
-		</li>
-		<li>
-			<img src="img/avatar.png" width="40" height="40" alt="Baptiste">
-			<div class="message_content">
-				<span class="message_author">Baptiste Gios</span>
-				<p>Coucou, c'est moi. Est-ce que...</p>
-			</div>
-			<div class="clear"></div>
-		</li>
+		{foreach $message as $mp}
+		<a href="index.php?action=privateMessage&id_chat={$mp['id_chat']}">
+			<li>
+				<img src="{$mp['avatar_path']}" width="40" height="40" alt="{$mp['firstname']}">
+				<div class="message_content">
+					<span class="message_author">{$mp['firstname']} {$mp['lastname']}</span>
+					<p>{$mp['content']}</p>
+				</div>
+				<div class="clear"></div>
+			</li>
+		</a>
+		{foreachelse}
+			Aucun nouveau message
+		{/foreach}
 	</ul>
 </div>

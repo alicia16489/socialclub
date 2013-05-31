@@ -78,7 +78,7 @@ class Users extends Table
 				->where(array(array('c.id_user_1',$this->id),array('c.id_user_2',$this->id,'OR')))
 				->where('p.receiver_deleted',0,'AND')
 				->where('p.sender_id',$this->id,'!=','AND')
-				->order('date_send')
+				->order('date_send','','DESC')
 				->limit(5)
 				->exec();
 		return($data);
@@ -134,7 +134,7 @@ class Users extends Table
 		$this->pictures_friends = $final_last_picture;
 	}
 	
-	public function syncFriendsList()
+	public function syncFriendsList($nb=null)
 	{
 		$friends = array();
 		$data=$this->query
@@ -143,7 +143,7 @@ class Users extends Table
 				->join(array("b" => "friends"),array("b" => "a.id=b.users_to_id"))
 				->join(array("c" => "friends"),array("c" => "a.id=c.users_from_id"))
 				->where(array(array("b.users_from_id",$this->id),array("c.users_to_id",$this->id,"OR")))
-				->where(array(array("b.accept_invit",1),array("c.accept_invit",1,"OR")),"","AND")
+				->where(array(array("b.accept_invit",$nb),array("c.accept_invit",$nb,"OR")),"","AND")
 				->exec();
 				
 		$friends = $data;

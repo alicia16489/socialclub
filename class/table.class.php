@@ -102,22 +102,22 @@
 		{
 			$this->fieldsTable();
 		}
-		
+		$fields = array();
+
 		foreach ($this->fields as $field)
 		{
-			$part .= "`".$field."` = '".myRealString($this->$field)."',";
+			if (!empty($this->$field))
+			{
+				$fields[$field] = myRealString($this->$field);
+			}
 		}
 
-		$part = substr($part, 0, -1);
+		$q = new Query;
+	
+
+		$res = $q->replace($this->tableName,$fields)->exec();
 		
-		$query = 'REPLACE INTO `'.$this->tableName.'` SET '.$part.'';
-		
-		myQuery($query);
-		
-		if ($this->$pk == null)
-		{
-			$this->set('id', mysqli_insert_id($link));
-		}
+		return($res);
 	}
 
 	public function hydrate($fields = ' *')

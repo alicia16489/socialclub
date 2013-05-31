@@ -9,7 +9,7 @@
 
 		if (!isset($_POST['ajax']))
 		{
-			$user->syncFriendsList();
+			$user->syncFriendsList(1);
 			$user->syncStatusFriends(1);
 			$user->syncPicturesFriends(1);
 			$user->syncPicturesList();
@@ -21,8 +21,19 @@
 				$smarty->assign("id_get", $_GET['id']);
 			else
 				$smarty->assign("id_get", "");
-				
+	
 			$smarty->assign("avatar",$avatar_path);
+
+
+				// Get 5 latests message
+				$user->syncChatList();
+				$chat = $user->get('chats');
+				$hasMp = FALSE;
+				$mp = $user->getLastMessage();
+
+				// END Message and chats
+
+				$smarty->assign("message",$mp);
 		}
 	}
 	
@@ -57,16 +68,7 @@
 									 	  "lastname" => $friend->get("lastname"));
 		}
 
-		// Get 5 latests message
-		$user->syncChatList();
-		$chat = $user->get('chats');
-		$hasMp = FALSE;
-		$mp = $user->getLastMessage();
-
-
-		// END Message and chats
-
-		$smarty->assign("mp",$mp);
+	
 
 		$smarty->assign("status",$status_friends);
 		

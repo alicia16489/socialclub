@@ -32,7 +32,8 @@
 
 							// Message
 							'privateMessage' => 'message',
-									
+							'sendMsg' => 'message'
+							
 	);
 	
 	// array filtre

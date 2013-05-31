@@ -503,3 +503,20 @@ $(".content_img").mouseleave(function(){
 });
 
 })(jQuery);
+
+// Envoi message en Ajax
+
+$('#msg').on('submit',function() {
+
+		var action = $('#msg').attr('action');
+		console.log(action);
+		$.post(action,$('#msg').serialize(),function(response){
+			$('#ok_message').html(response);
+		});
+
+		return false;
+});
+
+setTimeout(function() {
+	$('#ok_message').empty();
+}, 2000);

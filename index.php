@@ -16,8 +16,8 @@
 	
 	/* DEFAULT ACTION */
 
-		$action = $config['default']['unlog'];
-		if(!empty($_SESSION)){
+		$action = $config['default']['unlog'];	
+		if(!empty($_SESSION['user'])){
 			$action = $config['default']['log'];
 		}
 
@@ -45,7 +45,22 @@
 	// rooter action with file control
 	include($route=route($action));
 
-	// main view : template including
-	include ("views/main.view.php");
+
+
+	if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest')
+		{
+		    // Ajax request response
+		     
+		    include('./views/ajax.view.php');
+		   
+		}
+		else
+		{
+		    // HTTP request response
+			// main view : template including
+
+			include ("views/main.view.php");
+
+		}
 
 ?>
