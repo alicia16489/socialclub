@@ -3,49 +3,50 @@
 		<div id="mailbox">
 			<h3 class="h3_title">Boîte de récéption</h3>
 			<ul>
+				{foreach $chat_list as $user}
+				<a href="index.php?action=privateMessage&id_chat={$user@key}">
+					<li>
+						<img src="{$user['avatar_path']}" alt="avatar" height="40" width="40" />
+						<span>{$user['firstname']}<br/>{$user['lastname']}</span>
+					</li>
+				</a>
+				{foreachelse}
 				<li>
-					<img src="img/avatar.png" alt="avatar" height="40" width="40" />
-					<span>Baptiste<br/>Gios</span>
+					<span>Vous n'avez aucun messages !</span>
 				</li>
-				<li>
-					<img src="img/avatar.png" alt="avatar" height="40" width="40" />
-					<span>Baptiste<br/>Gios</span>
-				</li>
-				<li>
-					<img src="img/avatar.png" alt="avatar" height="40" width="40" />
-					<span>Baptiste<br/>Gios</span>
-				</li>
-				<li>
-					<img src="img/avatar.png" alt="avatar" height="40" width="40" />
-					<span>Baptiste<br/>Gios</span>
-				</li>
-				<li>
-					<img src="img/avatar.png" alt="avatar" height="40" width="40" />
-					<span>Baptiste<br/>Gios</span>
-				</li>
+				{/foreach}
 			</ul>
 			<div id="room_chat">
 				<ul>
+					{foreach $last_msg[$id_chat] as $msg}
+					{if $msg['sender_id'] != $id_receiver }
 					<li>
-						<img class="me" src="img/avatar.png" alt="avatar" height="60" width="60" />
+						<img class="me" src="{$chat_list[$id_chat]['avatar_path']}" alt="avatar" height="60" width="60" />
 						<p class="me">
-							<span>Envoy&eacute; le 12/04 &agrave; 11:42</span>
-							JEM TRO L&Eacute; KAYOUeeeeeeeeee eeeeeeeee eeeeeeeeeeeee eeeeeeeeeeeeeeeeeeeeeeeeee eeeeeeeee eeeeeeeeeeee eeeeeeeee eeeeeeeeeeeeeeee eeeeeeeeeeee eeeeeeeee eeeeeeeeeeeeeeee eeeeeeeeeeeeeeeeeeeeee eeeeeeeeee eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee eeeeeeeeeeee eeeeeeeeeee eeeeeeeee eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee eeeeeeee eeeeeeeeeeeeeeee eeeeeeeeeeeeeeeee eeeeeeeeeeee eeeeeeeeeeeee</p>
-						<div class="clear"></div>
-					</li>
-					<li>
-						<img class="him" title="him" src="img/avatar.gif" alt="avatar" height="60" width="60" />
-						<p class="him">
-							<span>Envoy&eacute; le 12/04 &agrave; 11:42</span>
-							MOA OSSI :) :)
+							<span>{$msg['date_send']}</span>
+							{$msg['content']}
 						</p>
 						<div class="clear"></div>
 					</li>
+					{else}
+					<li>
+						<img class="him" title="him" src="img/avatar.gif" alt="avatar" height="60" width="60" />
+						<p class="him">
+							<span>{$msg['date_send']}</span>
+							{$msg['content']}
+						</p>
+						<div class="clear"></div>
+					</li>
+					{/if}
+					{foreachelse}
+						Aucun Message !
+					{/foreach}
 				</ul>
 				<div id="mail_form">
-					<form id="msg" action="" >
+					<form id="msg" action="index.php?action=sendMsg" >
 						<textarea rows="4" placeholder="Tapez votre message..." name="content" required></textarea>
-						<input type="submit" value="Envoyer">
+						<input type="hidden" value="{$id_chat}" name="id_chat" />
+						<input type="submit" value="Envoyer"><span id="ok_message"></span>
 					</form>
 				</div>
 				

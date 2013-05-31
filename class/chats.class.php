@@ -15,7 +15,7 @@ class Chats extends Table {
 	public function getLastMessage($row,$limit)
 	{
 		$mp = new private_message();
-		$data = $mp->getAll($row,'date_send','DESC',array(array('id_chat',$this->id)),$limit);
+		$data = $mp->getAll($row,'date_send','ASC',array(array('id_chat',$this->id)),$limit);
 
 		foreach ($data as $value) {
 			$mps[] = $value['id'];

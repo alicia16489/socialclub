@@ -70,7 +70,7 @@ class Users extends Table
 				->where(array(array('c.id_user_1',$this->id),array('c.id_user_2',$this->id,'OR')))
 				->where('p.receiver_deleted',0,'AND')
 				->where('p.sender_id',$this->id,'!=','AND')
-				->order('date_send')
+				->order('date_send','','DESC')
 				->limit(5)
 				->exec();
 		return($data);

@@ -60,6 +60,7 @@
 		$chat = $user->get('chats');
 		$hasMp = FALSE;
 		$mp = $user->getLastMessage();
+		var_dump($mp);
 
 
 		// END Message and chats
