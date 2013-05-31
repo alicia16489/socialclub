@@ -21,7 +21,10 @@ class Chats extends Table {
 			$mps[] = $value['id'];
 		}
 
-		if (empty($mps)) return FALSE ;
+		if (empty($mps)) {
+			$this->mp = 0;
+			return FALSE ;
+		}
 
 		foreach ($mps as $key => $value) {
 			$mp = new private_message();

@@ -32,8 +32,8 @@
 
 							// Message
 							'privateMessage' => 'message',
-							'sendMsg' => 'message'
-							
+							'sendMsg' => 'message',
+							'new_chat' => 'message'
 	);
 	
 	// array filtre

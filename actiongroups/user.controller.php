@@ -401,7 +401,7 @@
 			}
 
 			$profil_user->syncPicturesList();
-			$profil_user->syncFriendsList();
+			$profil_user->syncFriendsList(1);
 
 			$infos_user = array();
 

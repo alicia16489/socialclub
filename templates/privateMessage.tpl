@@ -4,12 +4,15 @@
 			<h3 class="h3_title">Boîte de récéption</h3>
 			<div id="new_talk">
 				Nouvelle conversation
-				<select>
+				<form action="index.php?action=new_chat" method="POST">
+				<select name="id_friend">
 					<option value=""></option>
-					<option value="">Benoit Ciret</option>
-					<option value="">Nicolas Portier</option>
+					{foreach $friends_to_chat as $friend}
+					<option value="{$friend['id']}">{$friend['firstname']} {$friend['lastname']}</option>
+					{/foreach}
 				</select>
 				<input type="submit" value="Go"/>
+				</form>
 				<div class="clear"></div>
 			</div>
 			<ul>
@@ -28,6 +31,7 @@
 			</ul>
 			<div id="room_chat">
 				<ul>
+					
 					{foreach $last_msg[$id_chat] as $msg}
 					{if $msg['sender_id'] != $id_receiver }
 					<li>
