@@ -4,11 +4,19 @@ class Users extends Table
 	/* ATTRIBUTES */
 	
 		protected $id;
+		protected $rank_user_id;
 		protected $firstname;
 		protected $lastname;
 		protected $email;
 		protected $password;
-		protected $actif;
+		protected $birthdate;
+		protected $sexe;
+		protected $description;
+		protected $country;
+		protected $address;
+		protected $zip_code;
+		protected $town;
+		protected $created;
 		protected $avatar_path;
 		protected $pictures = array();
 		protected $pictures_friends = array();
@@ -126,7 +134,7 @@ class Users extends Table
 		$this->pictures_friends = $final_last_picture;
 	}
 	
-	public function syncFriendsList()
+	public function syncFriendsList($nb=null)
 	{
 		$friends = array();
 		$data=$this->query
@@ -135,7 +143,7 @@ class Users extends Table
 				->join(array("b" => "friends"),array("b" => "a.id=b.users_to_id"))
 				->join(array("c" => "friends"),array("c" => "a.id=c.users_from_id"))
 				->where(array(array("b.users_from_id",$this->id),array("c.users_to_id",$this->id,"OR")))
-				->where(array(array("b.accept_invit",1),array("c.accept_invit",1,"OR")),"","AND")
+				->where(array(array("b.accept_invit",$nb),array("c.accept_invit",$nb,"OR")),"","AND")
 				->exec();
 				
 		$friends = $data;

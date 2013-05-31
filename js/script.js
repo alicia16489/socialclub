@@ -9,53 +9,6 @@ var check_own = $("#check_own").attr("data-check");
 
 if (check_own == 'yes')
 {
-	function editProfil(input_id,input_name,error)
-	{
-		var content = $(this).html();
-
-		if (descr == false)
-		{
-			$(this).empty();
-
-			if (content == error)
-				$(this).append("<input type='text' id='"+input_id+"'>");
-			else
-				$(this).append("<input type='text' id='"+input_id+"' value='"+content+"'>");
-
-
-			$("#firstname_area").blur(function()
-			{
-				var data = {
-					action : 'profil',
-					elem : 'firstname',
-					ajax : 'on',
-					post : {
-						input_name : $(this).val()
-					}
-				};
-
-				$.post('./index.ajax.php', data, function(data){
-					if (data.state != "ok")
-					{
-						console.log(data.state);
-						$("#firstname_profil").empty();
-						$("#firstname_profil").html(data.state);
-					}
-					else
-					{
-						var new_content = $("#firstname_area").val();
-
-						$("#firstname_profil").empty();
-						$("#firstname_profil").text(new_content);
-					}
-				},"json");
-
-				descr = false;
-			});
-
-			descr = true;
-		}
-	}
 
 	$("#firstname_profil").click(function(){
 		var content = $(this).html();
@@ -500,10 +453,6 @@ if (check_own == 'yes')
 }
 $(".boxer").boxer();
 
-var widthPic = $(".gallery_img").width();
-var newWidthPic = (widthPic * 30) / 100;
-$(".gallery_img").width(newWidthPic);
-
 var widthAva = $(".avatar_profil").width();
 var newWidthAva = (widthAva * 30) / 100;
 $(".avatar_profil").width(newWidthAva);
@@ -530,6 +479,7 @@ $('#toggle_status_box').click(function(){
 });
 
 // INIT REDACTOR
+(function($){
 
 $(document).ready(function()
 {
@@ -552,6 +502,7 @@ $(".content_img").mouseleave(function(){
 	$(this).prev().hide();
 });
 
+})(jQuery);
 
 // Envoi message en Ajax
 
@@ -568,7 +519,4 @@ $('#msg').on('submit',function() {
 
 setTimeout(function() {
 	$('#ok_message').empty();
-}, 2000)
-
-
-
+}, 2000);

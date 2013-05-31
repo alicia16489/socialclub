@@ -1,5 +1,9 @@
-<div id="last_mp">
+<div id="last_mp" class="hidden">
 	<h3 class="h3_title">Derniers messages</h3>
+	<div class="toggle_box">
+		<div class="triangle_up_black"></div>
+	</div>
+	
 	<ul>
 		{foreach $message as $mp}
 		<a href="index.php?action=privateMessage&id_chat={$mp['id_chat']}">

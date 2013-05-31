@@ -105,7 +105,6 @@
 		$fields = array();
 
 		foreach ($this->fields as $field)
-
 		{
 			if (!empty($this->$field))
 			{
@@ -118,10 +117,12 @@
 
 		$res = $q->replace($this->tableName,$fields)->exec();
 
+
 		if ($this->$pk == null)
 		{
 			$this->set('id', $res);
 		}
+
 		return($res);
 	}
 

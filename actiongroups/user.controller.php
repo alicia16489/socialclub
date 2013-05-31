@@ -9,7 +9,7 @@
 
 		if (!isset($_POST['ajax']))
 		{
-			$user->syncFriendsList();
+			$user->syncFriendsList(1);
 			$user->syncStatusFriends(1);
 			$user->syncPicturesFriends(1);
 			$user->syncPicturesList();
@@ -21,6 +21,9 @@
 				$smarty->assign("id_get", $_GET['id']);
 			else
 				$smarty->assign("id_get", "");
+	
+			$smarty->assign("avatar",$avatar_path);
+
 
 				// Get 5 latests message
 				$user->syncChatList();
@@ -70,21 +73,25 @@
 		$smarty->assign("status",$status_friends);
 		
 		$smarty->assign("friends",$user->get("friends"));
-		$smarty->assign("avatar",$avatar_path);
 		
 		$smarty->assign('infos_pic', $user->get("pictures_friends"));
 		$smarty->assign('infos_user_pic', $infos_user_pic);
 	}
 	elseif($action == "forgot_pass"){
+		
 		if(!empty($_POST)){
-			$user = new Users();
+			
 			$user->set("email",$_POST['email']);
+			$user->hydrate("id");
 			if($user->get("state_hydrate")){
-				$object = "Reset password";
-				$email = $invite->get("email");
-				$type = "";
 				
-				mailing($email,$object,$type,null,null,null,$invite->get("key"));
+				$object = "Reset password";
+				$email = $user->get("email");
+				$type = "reset_pass";
+				
+				mailing($email,$object,$type,null,null,null,stringHash($grain.$_POST['email']));
+				
+				header("Location: index.php"); die();
 			}
 			else{
 				$smarty->assign("error","no");
@@ -94,6 +101,36 @@
 	}
 	elseif($action == "reset_pass"){
 		
+		if(!empty($_POST['password'])){
+			
+			if($_POST['password'] == $_POST['vpassword']){
+				
+				if(strlen($_POST['password']) > 7){
+					
+					$user->set("email",base64_decode($_GET['code']));
+					$user->hydrate();
+					if($user->get("state_hydrate")){
+						
+						$key = stringHash($grain.$user->get("email"));
+						if($key == $_GET['key']){
+							$user->set("password",stringHash($_POST['password']));
+							$user->save();
+							
+							header("Location: index.php"); die();
+						}
+					}
+				}
+				else{	
+					$smarty->assign("error_pass","8 caractÃ¨res minimum");
+				}
+			}
+			else{
+				$smarty->assign("error_vpass","Confirmation de password incorrect");
+			}
+		}
+		$smarty->assign("code",$_GET['code']);
+		$smarty->assign("key",$_GET['key']);
+		$smarty->assign("post",$_POST);
 	}
 	elseif($action == "invite")
 	{
@@ -121,7 +158,7 @@
 			// if last invite > 24 hours, send a new one
 			if($int_inter > 24 || $mailing_state)
 			{
-				$object = "Invitation à Social Night Club";
+				$object = "Invitation Ã  Social Night Club";
 				$email = $invite->get("email");
 				$sender = $user->get("firstname")." ".$user->get("lastname");
 				$type = "invite";
@@ -180,7 +217,7 @@
 		$user->hydrate();
 		if(!$user->get('state_hydrate'))
 		{ // si l'hydrate echoue
-			$message = "Email inéxistant";
+			$message = "Email inÃ©xistant";
 		}
 		else
 		{
@@ -206,10 +243,6 @@
 			elseif($user->get('password') != stringHash($_POST['password']))
 			{
 				$login_error['infos'] = true;
-			}
-			elseif($user->get('actif') == 0)
-			{
-				$login_error['actif'] = true;
 			}
 			else
 			{

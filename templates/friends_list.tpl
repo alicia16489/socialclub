@@ -1,5 +1,8 @@
-<div id="friends_list">
+<div id="friends_list" class="hidden">
 	<h3 class="h3_title">Amis</h3>
+	<div class="toggle_box">
+		<div class="triangle_up_black"></div>
+	</div>
 	<div>
 		{if isset($friends)}
 			{foreach $friends as $key => $friend}

@@ -7,10 +7,9 @@
 </head>
 <body>
 	<div>
-	<h4>Bonjour {$name}</h4>
-	<p>Vous avez recu une invitation de {$sender|capitalize} pour vous inscrire à Social Night Club !
-	<br>
-	<a href="{$url}">{$url}</a>
+	<h4>Reset pass</h4>
+	<p>
+		<a href="{$url}">{$url}</a>
 	</p>
 	</div>
 </body>

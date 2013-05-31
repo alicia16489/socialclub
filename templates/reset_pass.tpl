@@ -6,17 +6,23 @@
 			NOUVEAU MOT DE PASSE
 		</span>
 		<table>
-			<form action="index.php?action=reset_pass" method="post">
+			<form action="index.php?action=reset_pass&amp;code={$code}&amp;key={$key}" method="post">
 				<tr>
 					<td>
-						<input class="log" required type="password" name="password" placeholder="Nouveau mot de passe" />
+						<input value="{if isset($post['password'])}{$post['password']}{/if}" class="log" required type="password" name="password" placeholder="Nouveau mot de passe" />
 					</td>
 				</tr>
+				{if isset($error_pass)}
+					<tr><td>{$error_pass}</td></tr>
+				{/if}
 				<tr>
 					<td>
-						<input class="log" type="password" name="vpassword" placeholder="Confirmation du mot de passe" required/>
+						<input value="{if isset($post['password'])}{$post['vpassword']}{/if}" class="log" type="password" name="vpassword" placeholder="Confirmation du mot de passe" required/>
 					</td>
 				</tr>
+				{if isset($error_vpass)}
+					<tr><td>{$error_vpass}</td></tr>
+				{/if}
 				<tr>
 					<td colspan="2">
 						<input type="submit" class="submit" value="Envoyer" />
