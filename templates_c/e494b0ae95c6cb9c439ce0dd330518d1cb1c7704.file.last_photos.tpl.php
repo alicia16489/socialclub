@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.13, created on 2013-05-31 00:23:55
+<?php /* Smarty version Smarty-3.1.13, created on 2013-05-31 01:55:23
          compiled from ".\templates\last_photos.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:1235551a7d17b76ae48-98511411%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'e494b0ae95c6cb9c439ce0dd330518d1cb1c7704' => 
     array (
       0 => '.\\templates\\last_photos.tpl',
-      1 => 1369779651,
+      1 => 1369957671,
       2 => 'file',
     ),
   ),
@@ -15,6 +15,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.13',
+  'unifunc' => 'content_51a7d17b7ee898_69514395',
   'variables' => 
   array (
     'infos_pic' => 0,
@@ -23,8 +25,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'infos_user_pic' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.13',
-  'unifunc' => 'content_51a7d17b7ee898_69514395',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_51a7d17b7ee898_69514395')) {function content_51a7d17b7ee898_69514395($_smarty_tpl) {?><div id="last_photos">
 	<h3 class="h3_title">Dernières photos</h3>
@@ -41,7 +41,8 @@ $_smarty_tpl->tpl_vars['picture']->_loop = true;
 				<div id="slide<?php echo $_smarty_tpl->tpl_vars['key']->value+1;?>
 " class="slide">
 				    <div class="visu">
-				    	<a class="boxer" rel="last_photo" href="<?php echo $_smarty_tpl->tpl_vars['picture']->value['path'];?>
+				    	<a class="boxer boxer_carou" rel="last_photo" id="boxer<?php echo $_smarty_tpl->tpl_vars['key']->value+1;?>
+" href="<?php echo $_smarty_tpl->tpl_vars['picture']->value['path'];?>
 " title="<br /><?php echo $_smarty_tpl->tpl_vars['picture']->value['description'];?>
 <br /><a href='index.php?action=profil&amp;id=<?php echo $_smarty_tpl->tpl_vars['picture']->value['user_id'];?>
 '><?php echo $_smarty_tpl->tpl_vars['infos_user_pic']->value[$_smarty_tpl->tpl_vars['key']->value]['firstname'];?>
@@ -53,10 +54,6 @@ $_smarty_tpl->tpl_vars['picture']->_loop = true;
 " title="<?php echo $_smarty_tpl->tpl_vars['picture']->value['title'];?>
 " />
 						</a>
-				    </div>
-				    <div class="title_carrousel">
-				    	<?php echo $_smarty_tpl->tpl_vars['picture']->value['title'];?>
-
 				    </div>
 				</div>
 			<?php } ?>

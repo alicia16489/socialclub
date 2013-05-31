@@ -547,15 +547,11 @@ $(".content_img").mouseenter(function(){
 
 });
 
-
-$('#post_status_box').mouseout(function(){
-	$('#post_status_box').height('15px')
-});
-
 $(".content_img").mouseleave(function(){
 
 	$(this).prev().hide();
 });
+
 
 // Envoi message en Ajax
 
@@ -573,5 +569,6 @@ $('#msg').on('submit',function() {
 setTimeout(function() {
 	$('#ok_message').empty();
 }, 2000)
+
 
 
