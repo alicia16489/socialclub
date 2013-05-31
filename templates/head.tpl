@@ -13,7 +13,6 @@
         <link rel="stylesheet" type="text/css" media="all" href="./styles/carrousel.css" /> 
         <link rel="stylesheet" type="text/css" media="all" href="./styles/redactor.css" /> 
         <link rel="shortcut icon" href="img/favicon.ico" />
-        <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
 
         <script type="text/javascript" src="./libs/jquery/jquery-2.0.0.min.js"></script>
         <script type="text/javascript" src="./libs/redactor.min.js"></script>

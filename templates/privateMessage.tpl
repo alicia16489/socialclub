@@ -1,8 +1,17 @@
-
 <div class="pos">
 	<div id="left_col">
 		<div id="mailbox">
 			<h3 class="h3_title">Boîte de récéption</h3>
+			<div id="new_talk">
+				Nouvelle conversation
+				<select>
+					<option value=""></option>
+					<option value="">Benoit Ciret</option>
+					<option value="">Nicolas Portier</option>
+				</select>
+				<input type="submit" value="Go"/>
+				<div class="clear"></div>
+			</div>
 			<ul>
 				<li>
 					<img src="img/avatar.png" alt="avatar" height="40" width="40" />
@@ -46,7 +55,7 @@
 				<div id="mail_form">
 					<form id="msg" action="" >
 						<textarea rows="4" placeholder="Tapez votre message..." name="content" required></textarea>
-						<input type="submit" value="Envoyer">
+						<input type="submit" value="Envoyer"><span id="ok_message"></span>
 					</form>
 				</div>
 				

@@ -105,15 +105,13 @@
 		
 		foreach ($this->fields as $field)
 		{
-			if (!empty($this->$field))
-			{
-				$part .= "`".$field."` = '".myRealString($this->$field)."',";
-			}
+			$part .= "`".$field."` = '".myRealString($this->$field)."',";
 		}
 
 		$part = substr($part, 0, -1);
+		
 		$query = 'REPLACE INTO `'.$this->tableName.'` SET '.$part.'';
-
+		
 		myQuery($query);
 		
 		if ($this->$pk == null)

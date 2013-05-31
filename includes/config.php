@@ -49,7 +49,8 @@
                         "gif",
                         "png"		 
     );
-
+	
+	$grain = "GJjhklhh44dfD4S4S52";
 	$avatar_path = "./img/avatar.png";
 	$path = "./files/";
 ?>

@@ -4,11 +4,19 @@ class Users extends Table
 	/* ATTRIBUTES */
 	
 		protected $id;
+		protected $rank_user_id;
 		protected $firstname;
 		protected $lastname;
 		protected $email;
 		protected $password;
-		protected $actif;
+		protected $birthdate;
+		protected $sexe;
+		protected $description;
+		protected $country;
+		protected $address;
+		protected $zip_code;
+		protected $town;
+		protected $created;
 		protected $avatar_path;
 		protected $pictures = array();
 		protected $pictures_friends = array();

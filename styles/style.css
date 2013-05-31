@@ -31,7 +31,7 @@ body
 {
 	background: url('../img/motif.png') left top;
 	line-height: 1;
-	font-family: Lato, arial, sans-serif;
+	font-family: arial, sans-serif;
 }
 
 ol, ul
@@ -173,7 +173,6 @@ header nav
 	padding-top: 100px;
 }
 
-
 header nav ul#menu
 {
 	margin-bottom: 3px;
@@ -270,6 +269,48 @@ div#triangle_up
 
 /* END HEADER */
 
+.toggle_box
+{
+	width: 30px;
+	height: 17px;
+	cursor: pointer;
+	padding-top: 13px;
+
+	position: absolute;
+	right: 2px;
+	top: 2px;
+}
+
+.triangle_down_black
+{
+	width: 0;
+	height: 0;
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	border-top: 7px solid #000;
+
+	margin: 0 auto;
+
+}
+
+.triangle_up_black
+{
+	width: 0;
+	height: 0;
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	border-bottom: 7px solid #000;
+
+	margin: 0 auto;
+
+}
+
+.hidden
+{
+	overflow: hidden;
+	position: relative;
+}
+
 
 
 /* LOGIN */
@@ -359,6 +400,15 @@ div.status_content p
 	font-size: 14px;
 }
 
+a.profile_link
+{
+	color: #000;
+}
+
+a.profile_link:hover
+{
+	color: #C72C48;
+}
 
 /* END LEFT */
 
@@ -383,7 +433,7 @@ h3.h3_title
 
 div#last_mp
 {
-	margin-bottom: 10px;
+	position: relative;
 }
 
 div#last_mp ul li
@@ -426,11 +476,6 @@ span.message_author
 
 /* MAILBOX */
 
-div#mailbox
-{
-
-}
-
 div#mailbox ul
 {
 	float: left;
@@ -465,6 +510,20 @@ div#mailbox ul li span
 	text-align: center;
 	font-size: 14px;
 	font-weight: bold;
+}
+
+div#new_talk
+{
+	margin-top: 10px;
+	margin-bottom: 10px;
+	padding: 15px 0 15px 20px;
+	color: #FFF;
+	background-color: #C72C48;
+}
+
+div#new_talk select
+{
+	margin-left: 15px;
 }
 
 div#room_chat
@@ -544,7 +603,89 @@ div#mail_form form textarea
 	border: 1px solid #EEE;
 }
 
+div#mail_form form input
+{
+	margin-right: 15px;
+}
+
+span#ok_message
+{
+	color: #C72C48;
+	font-weight: bold;
+	font-size: 12px;
+}
+
 /* END MAILBOX */
+
+
+/* LAST STATUS */
+
+section.status_box
+{
+	padding: 5px 10px;
+	position: relative;
+}
+
+section.status_box a img
+{
+	float: left;
+	margin-right: 10px;
+}
+
+div.status_box_content
+{
+	padding-top: 3px;
+	float: left;
+}
+
+div.status_box_content span
+{
+	display: block;
+	font-size: 16px;
+	font-weight: bold;
+	margin-bottom: 3px;
+}
+
+div.status_box_content p
+{
+	font-size: 14px;
+	color: #888;
+}
+
+/* END LAST STATUS */
+
+
+/* LAST INVITES */
+
+div#last_invites section.status_box span
+{
+	display: block;
+	padding-top: 12px;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+section.status_box a
+{
+	color: #000;
+}
+
+section.status_box a:hover
+{
+	color: #C72C48;
+}
+
+span.accept_invite
+{
+	position: absolute;
+	top: 0;
+	right: 10px;
+}
+
+
+/* END LAST INVITES */
+
+
 
 
 div#conteneur
@@ -707,7 +848,9 @@ div#descro
 	width: 75px;
 }
 
-.boxor_carou
+.profil_photo
 {
-	z-index: 100000;
+	width: 202px;
+	height: 202px;
+	float: left;
 }

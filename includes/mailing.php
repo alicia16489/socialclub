@@ -35,8 +35,8 @@
 				$href="localhost/socialclub/index.php?action=".$action."&amp;code=".base64_encode($email);
 			break;
 			case "reset_pass":
-				$action="validate";
-				$href="localhost/socialclub/index.php?action=".$action."&amp;code=".base64_encode($email);
+				$action="reset_pass";
+				$href="localhost/socialclub/index.php?action=".$action."&amp;code=".base64_encode($email)."&amp;key=".$key."";
 			break;
 		}
 		$smarty->assign("url",$href);
